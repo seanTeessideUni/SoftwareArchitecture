@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using UserDB;
+using ViewCustomers.DAL;
 
 namespace ViewCustomers.Controllers
 {
@@ -15,11 +16,18 @@ namespace ViewCustomers.Controllers
        // private UserContext db = new UserContext();
 
         private ViewCustomers.DAL.IUserRepository db;
-
-        public UsersController()
+        
+        // Use constructor injection here
+        public UsersController(IUserRepository repository)
         {
-            this.db = new ViewCustomers.DAL.UserRepository(new UserContext());
+            this.db = repository;
         }
+
+
+        //public UsersController()
+        //{
+        //    this.db = new ViewCustomers.DAL.UserRepository(new UserContext());
+        //}
 
         // GET: Users
         public ActionResult Index()
